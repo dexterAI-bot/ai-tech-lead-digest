@@ -9,18 +9,20 @@ ISSUE_PATH=$(python3 tools/generate_issue.py --date "$DATE")
 
 # Commit + push
 
-git add site/feed.json "site/$ISSUE_PATH" || true
+git add docs/feed.json "docs/$ISSUE_PATH" || true
 if ! git diff --cached --quiet; then
   git commit -m "digest: $DATE" >/dev/null
   git push >/dev/null
 fi
 
-PAGES_URL="https://dexterai-bot.github.io/ai-tech-lead-digest/site/$ISSUE_PATH"
+PAGES_URL="https://dexterai-bot.github.io/ai-tech-lead-digest/$ISSUE_PATH"
+ARCHIVE_URL="https://dexterai-bot.github.io/ai-tech-lead-digest/"
 
 MSG=$(cat <<EOF
 AI Tech Lead Digest — $DATE
 
-• Read the full issue: $PAGES_URL
+• Full issue: $PAGES_URL
+• Archive: $ARCHIVE_URL
 EOF
 )
 
