@@ -2,10 +2,10 @@
   "topics": ["llm","agents","new features"],
   "rss": [
     {"name":"OpenAI Blog","url":"https://openai.com/blog/rss.xml"},
-    {"name":"Anthropic News","url":"https://www.anthropic.com/news/rss.xml"},
+    {"name":"Anthropic News","url":"https://openrss.org/feed/www.anthropic.com/news"},
     {"name":"Google AI Blog","url":"https://blog.google/technology/ai/rss/"},
-    {"name":"DeepMind Blog","url":"https://deepmind.google/discover/blog/rss.xml"},
-    {"name":"Meta AI","url":"https://ai.meta.com/blog/rss/"},
+    {"name":"Google DeepMind","url":"https://deepmind.google/blog/rss.xml"},
+    {"name":"Planet AI (aggregated)","url":"https://planet-ai.net/rss.xml"},
     {"name":"Hugging Face Blog","url":"https://huggingface.co/blog/feed.xml"},
     {"name":"LangChain Releases","url":"https://github.com/langchain-ai/langchain/releases.atom"},
     {"name":"LangGraph Releases","url":"https://github.com/langchain-ai/langgraph/releases.atom"},
