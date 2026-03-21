@@ -86,7 +86,7 @@ def save_state(st):
 
 def send(msg: str):
     subprocess.check_call([
-        'openclaw','message','send','--channel','telegram','--target','8250193666','--message',msg,'--json'
+        'openclaw','message','send','--channel','telegram','--target','-5241424017','--message',msg,'--json'
     ], stdout=subprocess.DEVNULL)
 
 

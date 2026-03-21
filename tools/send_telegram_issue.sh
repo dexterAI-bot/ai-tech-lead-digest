@@ -24,4 +24,4 @@ AI Tech Lead Digest — $DATE
 EOF
 )
 
-openclaw message send --channel telegram --target 8250193666 --message "$MSG" --json >/dev/null
+openclaw message send --channel telegram --target -5241424017 --message "$MSG" --json >/dev/null
