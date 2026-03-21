@@ -26,9 +26,12 @@ SOURCES = ROOT / 'tools' / 'sources.json'
 KEYWORDS = [
   r'agent', r'agents', r'mcp', r'function calling', r'tool calling', r'chatgpt', r'gpt-5', r'gpt-4',
   r'claude', r'sonnet', r'opus', r'gemini', r'llama', r'bedrock', r'copilot', r'release', r'launch',
-  r'new model', r'new feature', r'api', r'sdk'
+  r'new model', r'new feature', r'api'
 ]
 PAT = re.compile('|'.join(KEYWORDS), re.IGNORECASE)
+
+# Exclude noisy "SDK version bump" style items (especially GitHub release feeds).
+EXCLUDE = re.compile(r'\bsdk\b|\bv?\d+\.\d+\.\d+\b', re.IGNORECASE)
 
 
 def fetch(url: str) -> bytes:
@@ -122,6 +125,11 @@ def main():
                 continue
             if not PAT.search(title):
                 continue
+
+            # Drop "SDK/version" noise. We still allow major announcements from lab blogs.
+            if EXCLUDE.search(title) and 'Releases' in src.get('name',''):
+                continue
+
             hits.append((src['name'], title.strip(), link))
 
     if not hits:
