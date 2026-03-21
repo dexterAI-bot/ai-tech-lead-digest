@@ -1,0 +1,15 @@
+{
+  "topics": ["llm","agents","new features"],
+  "rss": [
+    {"name":"OpenAI Blog","url":"https://openai.com/blog/rss.xml"},
+    {"name":"Anthropic News","url":"https://www.anthropic.com/news/rss.xml"},
+    {"name":"Google AI Blog","url":"https://blog.google/technology/ai/rss/"},
+    {"name":"DeepMind Blog","url":"https://deepmind.google/discover/blog/rss.xml"},
+    {"name":"Meta AI","url":"https://ai.meta.com/blog/rss/"},
+    {"name":"Hugging Face Blog","url":"https://huggingface.co/blog/feed.xml"},
+    {"name":"LangChain Releases","url":"https://github.com/langchain-ai/langchain/releases.atom"},
+    {"name":"LangGraph Releases","url":"https://github.com/langchain-ai/langgraph/releases.atom"},
+    {"name":"LlamaIndex Releases","url":"https://github.com/run-llama/llama_index/releases.atom"},
+    {"name":"Vercel AI SDK Releases","url":"https://github.com/vercel/ai/releases.atom"}
+  ]
+}
