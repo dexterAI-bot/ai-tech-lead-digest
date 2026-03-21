@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Tech Lead Digest</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <div class="header">
+    <h1>AI Tech Lead Digest</h1>
+    <div class="sub">Tue + Fri 09:30 (Asia/Jerusalem) • LLMs • Agents • New features</div>
+  </div>
+  <div class="wrap">
+    <div class="card">
+      <h2>Latest issues</h2>
+      <div id="issues">Loading…</div>
+    </div>
+    <div class="footer">Generated locally on DexterAI’s Mac mini. Each issue links to original sources.</div>
+  </div>
+
+  <script>
+    async function main(){
+      const res = await fetch('feed.json', {cache:'no-store'});
+      const feed = await res.json();
+      const host = document.getElementById('issues');
+      host.innerHTML = '';
+      if(!feed.issues || !feed.issues.length){
+        host.textContent = 'No issues yet.';
+        return;
+      }
+      for(const it of feed.issues){
+        const a = document.createElement('a');
+        a.href = it.path;
+        a.textContent = `${it.date} — ${it.title}`;
+        const div = document.createElement('div');
+        div.style.margin = '8px 0';
+        div.appendChild(a);
+        if(it.summary){
+          const s=document.createElement('div');
+          s.style.color='var(--muted)';
+          s.style.marginTop='2px';
+          s.textContent=it.summary;
+          div.appendChild(s);
+        }
+        host.appendChild(div);
+      }
+    }
+    main().catch(e=>{document.getElementById('issues').textContent='Failed to load feed.json';});
+  </script>
+</body>
+</html>
