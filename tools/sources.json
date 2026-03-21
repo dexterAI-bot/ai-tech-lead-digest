@@ -10,6 +10,7 @@
     {"name":"LangChain Releases","url":"https://github.com/langchain-ai/langchain/releases.atom"},
     {"name":"LangGraph Releases","url":"https://github.com/langchain-ai/langgraph/releases.atom"},
     {"name":"LlamaIndex Releases","url":"https://github.com/run-llama/llama_index/releases.atom"},
-    {"name":"Vercel AI SDK Releases","url":"https://github.com/vercel/ai/releases.atom"}
+    {"name":"Vercel AI SDK Releases","url":"https://github.com/vercel/ai/releases.atom"},
+    {"name":"OpenClaw Releases","url":"https://github.com/openclaw/openclaw/releases.atom"}
   ]
 }
