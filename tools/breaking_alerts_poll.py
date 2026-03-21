@@ -90,6 +90,18 @@ def send(msg: str):
     ], stdout=subprocess.DEVNULL)
 
 
+def tldr_from_title(title: str) -> str:
+    t = re.sub(r'\s+', ' ', (title or '').strip())
+    # Very lightweight TL;DR: keep it short and focused.
+    # If title contains a colon, prefer the part after it.
+    if ':' in t and len(t.split(':', 1)[1].strip()) >= 12:
+        t = t.split(':', 1)[1].strip()
+    # Trim to ~140 chars.
+    if len(t) > 140:
+        t = t[:137].rstrip() + '...'
+    return t
+
+
 def main():
     st = load_state()
     seen = set(st.get('seen') or [])
@@ -118,7 +130,8 @@ def main():
     # Alert only top 3 per run
     for src, title, link in hits[:3]:
         seen.add(link)
-        send(f"Breaking AI update ({src}):\n{title}\n{link}")
+        tl = tldr_from_title(title)
+        send(f"AI news ({src})\nTL;DR: {tl}\n{link}")
 
     st['seen'] = list(seen)[-500:]
     st['lastRun'] = dt.datetime.utcnow().isoformat() + 'Z'
