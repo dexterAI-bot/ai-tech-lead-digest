@@ -23,14 +23,18 @@ DOCS = ROOT / 'docs'
 STATE = DOCS / 'alert-state.json'
 SOURCES = ROOT / 'tools' / 'sources.json'
 
-KEYWORDS = [
-  r'agent', r'agents', r'mcp', r'function calling', r'tool calling', r'chatgpt', r'gpt-5', r'gpt-4',
-  r'claude', r'sonnet', r'opus', r'gemini', r'llama', r'bedrock', r'copilot', r'release', r'launch',
-  r'new model', r'new feature', r'api'
-]
-PAT = re.compile('|'.join(KEYWORDS), re.IGNORECASE)
+# Breaking-only title filter (strict):
+# alert only when headline signals a major launch/release/availability/model step.
+BREAKING_PAT = re.compile(
+    r'\b('
+    r'launch(?:ed)?|release(?:d)?|now\s+available|general\s+availability|ga\b|'
+    r'new\s+model|introducing|announce(?:d|ment)?|debut|shipping|'
+    r'gemini\s*\d+(?:\.\d+)?|gpt-\d+(?:\.\d+)?|claude\s*\d+(?:\.\d+)?|llama\s*\d+(?:\.\d+)?'
+    r')\b',
+    re.IGNORECASE,
+)
 
-# Exclude noisy "SDK version bump" style items (especially GitHub release feeds).
+# Exclude noisy SDK/version bump style items (esp. release feeds).
 EXCLUDE = re.compile(r'\bsdk\b|\bv?\d+\.\d+\.\d+\b', re.IGNORECASE)
 
 
@@ -123,7 +127,7 @@ def main():
             title = it.get('title') or ''
             if not link or link in seen:
                 continue
-            if not PAT.search(title):
+            if not BREAKING_PAT.search(title):
                 continue
 
             # Drop "SDK/version" noise. We still allow major announcements from lab blogs.
