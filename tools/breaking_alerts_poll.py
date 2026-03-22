@@ -34,6 +34,12 @@ BREAKING_PAT = re.compile(
     re.IGNORECASE,
 )
 
+# Developer-relevant keywords (full-stack focus)
+DEV_KW_PAT = re.compile(
+    r'\b(api|framework|sdk|devtools?|cli|frontend|backend|serverless|stack|platform|integration|deployment|edge|observability|monitoring|database|graphql|rest|web|cloud|infrastructure|security|performance)\b',
+    re.IGNORECASE,
+)
+
 # Exclude noisy SDK/version bump style items (esp. release feeds).
 EXCLUDE = re.compile(r'\bsdk\b|\bv?\d+\.\d+\.\d+\b', re.IGNORECASE)
 
@@ -132,6 +138,9 @@ def main():
 
             # Drop "SDK/version" noise. We still allow major announcements from lab blogs.
             if EXCLUDE.search(title) and 'Releases' in src.get('name',''):
+                continue
+
+            if not DEV_KW_PAT.search(title):
                 continue
 
             hits.append((src['name'], title.strip(), link))
