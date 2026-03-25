@@ -18,7 +18,9 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / 'site'
+DOCS = ROOT / 'docs'
 ISSUES_DIR = SITE / 'issues'
+DOCS_ISSUES_DIR = DOCS / 'issues'
 FEED_PATH = SITE / 'feed.json'
 SOURCES_PATH = ROOT / 'tools' / 'sources.json'
 
@@ -220,6 +222,7 @@ def main():
     issue_path = f'issues/{date}.html'
     out_path = ISSUES_DIR / f'{date}.html'
     ISSUES_DIR.mkdir(parents=True, exist_ok=True)
+    DOCS_ISSUES_DIR.mkdir(parents=True, exist_ok=True)
 
     story_html = []
     for it in selected:
@@ -261,6 +264,7 @@ def main():
 </html>"""
 
     out_path.write_text(html, 'utf-8')
+    (DOCS_ISSUES_DIR / f'{date}.html').write_text(html, 'utf-8')
 
     feed = json.loads(FEED_PATH.read_text('utf-8'))
     feed.setdefault('issues', [])
